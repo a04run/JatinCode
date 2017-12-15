@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<script src="markerclusterer.js"></script>
+	<title>jatin</title>
+	<style type="text/css">
+		#map
+		{
+			height: 400px;
+			width: 80%;
+			margin: 0 auto;
+		}
+	</style>
+</head>
+<body>
+<h1>Galloway's Map!</h1>
+<div id="map"></div>
+<script type="text/javascript">
+
+	function initMap()
+	{
+		 var map = new google.maps.Map(document.getElementById('map'), {
+          zoom: 3,
+          center: {lat: 39.493971, lng: -74.457683}
+        });
+		 // Create an array of alphabetical characters used to label the markers.
+        var labels = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ';
+
+        // Add some markers to the map.
+        // Note: The code uses the JavaScript Array.prototype.map() method to
+        // create an array of markers based on a given "locations" array.
+        // The map() method here has nothing to do with the Google Maps API.
+        var locations = [
+        {lat: 39.491601, lng: -74.463159},
+        {lat: 39.490122, lng: -74.475756},
+        {lat: 39.494835, lng: -74.458713}
+        ]
+        var markers = locations.map(function(location, i) {
+          return new google.maps.Marker({
+            position: location,
+            label: labels[i % labels.length]
+          });
+        });
+        // Add a marker clusterer to manage the markers.
+        var markerCluster = new MarkerClusterer(map, markers,
+            {imagePath: 'images/m'});
+
+	}
+</script>
+<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAzEBFHdnw7BcsqPhHu8jic8zh4PsUFhnE&callback=initMap"></script>
+</body>
+</html>
